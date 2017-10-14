@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import {
     trigger, state, style,
-    animate, transition
+    animate, transition, keyframes
 } from '@angular/animations';
 
 import { mockData } from './language/mock.data';
@@ -14,21 +14,22 @@ import { Language } from './language/language.model';
     animations: [
         trigger('slip', [
             state('in', style({
-                transform: 'translateX(0) scale(1)',
+                transform: 'translateX(0)',
                 opacity: 1
             })),
             transition(':enter', [ // void => *
-                style({
-                    transform: 'translateX(-100%) scale(1.1)',
-                    opacity: 0
-                }),
-                animate('500ms ease-in')
+                animate('500ms ease-in', keyframes([
+                    style({opacity: 0, transform: 'translateX(-100%)', offset: 0}),
+                    style({opacity: 1, transform: 'translateX(30px)',  offset: 0.3}),
+                    style({opacity: 1, transform: 'translateX(0)',     offset: 1.0})
+                ]))
             ]),
             transition(':leave',  // * => void
-                animate('500ms ease-out', style({
-                    transform: 'translateX(100%) scale(1.2)',
-                    opacity: 0
-                }))
+                animate('500ms ease-out', keyframes([
+                    style({opacity: 1, transform: 'translateX(0)',     offset: 0}),
+                    style({opacity: 1, transform: 'translateX(-30px)', offset: 0.7}),
+                    style({opacity: 0, transform: 'translateX(100%)',  offset: 1.0})
+                ]))
             ),
         ]),
     ]
