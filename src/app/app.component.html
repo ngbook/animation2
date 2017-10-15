@@ -1,5 +1,8 @@
 <div class="app-wrapper">
-    <div [@slip]="'in'" *ngFor="let lang of languages">
+    <div *ngFor="let lang of languages"
+        (@slip.start)="animationStarted($event)"
+        (@slip.done)="animationDone($event)"
+        [@slip]="'in'">
         <language [lang]="lang"></language>
     </div>
 </div>

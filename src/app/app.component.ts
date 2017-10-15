@@ -1,7 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import {
     trigger, state, style,
-    animate, transition, keyframes
+    animate, transition, keyframes,
+    AnimationEvent,
 } from '@angular/animations';
 
 import { mockData } from './language/mock.data';
@@ -39,6 +40,13 @@ export class AppComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.insertData();
+    }
+
+    animationStarted(event: AnimationEvent) {
+        console.log(event);
+    }
+    animationDone(event: AnimationEvent) {
+        console.log(event);
     }
 
     private insertData() {
