@@ -43,10 +43,10 @@ export class AppComponent implements AfterViewInit {
     }
 
     animationStarted(event: AnimationEvent) {
-        console.log(event);
+        console.log('animation start');
     }
     animationDone(event: AnimationEvent) {
-        console.log(event);
+        console.log('animation end');
     }
 
     private insertData() {
